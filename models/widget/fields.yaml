@@ -1,0 +1,5 @@
+fields:
+  name:
+    label: 'eev.widgets::lang.name'
+    span: full
+    type: text

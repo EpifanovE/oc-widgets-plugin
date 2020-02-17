@@ -1,0 +1,18 @@
+columns:
+    id:
+        label: ID
+        type: number
+        sortable: true
+    name:
+        label: 'eev.widgets::lang.name'
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: 'eev.widgets::lang.created_at'
+        type: datetime
+        sortable: true
+    updated_at:
+        label: 'eev.widgets::lang.updated_at'
+        type: datetime
+        sortable: true

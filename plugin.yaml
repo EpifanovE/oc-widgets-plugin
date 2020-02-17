@@ -1,0 +1,17 @@
+plugin:
+    name: 'eev.widgets::lang.plugin.name'
+    description: 'eev.widgets::lang.plugin.description'
+    author: 'Evgeny Epifanov'
+    icon: icon-bread-slice
+    homepage: 'https://eecode.ru'
+permissions:
+    eev.widgets.manage-widgets:
+        tab: 'eev.widgets::lang.widgets'
+        label: 'eev.widgets::lang.manage-widgets'
+navigation:
+    widgets:
+        label: 'eev.widgets::lang.plugin.name'
+        url: eev/widgets/widgetcontroller
+        icon: icon-bell
+        permissions:
+            - eev.widgets.manage-widgets
