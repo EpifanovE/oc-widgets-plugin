@@ -1,6 +1,6 @@
 name: 'eev.widgets::lang.widget'
 form: $/eev/widgets/models/widget/fields.yaml
-modelClass: EEV\Leads\Models\Lead
+modelClass: EEV\Widgets\Models\Widget
 defaultRedirect: eev/widgets/widgetcontroller
 create:
     title: 'eev.widgets::lang.creating'

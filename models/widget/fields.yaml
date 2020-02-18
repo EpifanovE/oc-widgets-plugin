@@ -3,3 +3,11 @@ fields:
     label: 'eev.widgets::lang.name'
     span: full
     type: text
+  type:
+    label: 'eev.widgets::lang.type'
+    type: dropdown
+  is_active:
+    label: 'eev.widgets::lang.is_active'
+    span: full
+    type: switch
+    default: true
