@@ -1,17 +1,17 @@
 plugin:
-    name: 'eev.widgets::lang.plugin.name'
-    description: 'eev.widgets::lang.plugin.description'
+    name: 'eev.frontpage::lang.plugin.name'
+    description: 'eev.frontpage::lang.plugin.description'
     author: 'Evgeny Epifanov'
     icon: icon-bread-slice
     homepage: 'https://eecode.ru'
 permissions:
     eev.widgets.manage-widgets:
-        tab: 'eev.widgets::lang.widgets'
-        label: 'eev.widgets::lang.manage-widgets'
+        tab: 'eev.frontpage::lang.widgets'
+        label: 'eev.frontpage::lang.manage-widgets'
 navigation:
-    widgets:
-        label: 'eev.widgets::lang.plugin.name'
-        url: eev/widgets/widgetcontroller
+    frontpage:
+        label: 'eev.frontpage::lang.plugin.name'
+        url: eev/frontpage/widgetcontroller
         icon: icon-bell
         permissions:
             - eev.widgets.manage-widgets

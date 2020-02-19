@@ -1,14 +1,14 @@
-name: 'eev.widgets::lang.widget'
-form: $/eev/widgets/models/widget/fields.yaml
-modelClass: EEV\Widgets\Models\Widget
-defaultRedirect: eev/widgets/widgetcontroller
+name: 'eev.frontpage::lang.widget'
+form: $/eev/frontpage/models/widget/fields.yaml
+modelClass: EEV\Frontpage\Models\Widget
+defaultRedirect: eev/frontpage/widgetcontroller
 create:
-    title: 'eev.widgets::lang.creating'
-    redirect: 'eev/widgets/widgetcontroller/update/:id'
-    redirectClose: eev/widgets/widgetcontroller
-    flashSave: 'eev.widgets::lang.saved'
+    title: 'eev.frontpage::lang.creating'
+    redirect: 'eev/frontpage/widgetcontroller/update/:id'
+    redirectClose: eev/frontpage/widgetcontroller
+    flashSave: 'eev.frontpage::lang.saved'
 update:
-    title: 'eev.widgets::lang.updating'
-    redirect: eev/widgets/widgetcontroller
-    redirectClose: eev/widgets/widgetcontroller
-    flashSave: 'eev.widgets::lang.saved'
+    title: 'eev.frontpage::lang.updating'
+    redirect: eev/frontpage/widgetcontroller
+    redirectClose: eev/frontpage/widgetcontroller
+    flashSave: 'eev.frontpage::lang.saved'

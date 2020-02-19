@@ -3,18 +3,24 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 d-flex align-items-center">
                 <div class="hero__content">
+                    {% if data.title %}
                     <h2 class="hero__title">
-                        <strong>Отделка помещений</strong><br>в Нижнем Новгороде и области</h2>
+                        {{ data.title|raw }}
+                    </h2>
+                    {% endif %}
+                    {% if data.text %}
                     <div class="hero__desc">
-                        Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали
-                        от всех живут они в буквенных домах на берегу Семантика большого языкового океана.
+                        {{ data.text|raw }}
                     </div>
+                    {% endif %}
+                    {% if data.button_text %}
                     <button class="hero__button button button_cta button_inverse side-menu-button" data-target="#contacts-menu">
                         <span class="button__text">
-                            Узнать подробнее
+                            {{ data.button_text }}
                         </span>
                         <i class="fas fa-arrow-right button__icon button__icon_right"></i>
                     </button>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -1,12 +1,12 @@
 <?php
 
-namespace EEV\Widgets;
+namespace EEV\Frontpage;
 
 use Backend\Widgets\Form;
-use EEV\Widgets\Classes\Types\WidgetType;
-use EEV\Widgets\Classes\Widget;
-use EEV\Widgets\Components\Hero;
-use EEV\Widgets\Controllers\WidgetController;
+use EEV\Frontpage\Classes\Widget;
+use EEV\Frontpage\Components\FrontSections;
+use EEV\Frontpage\Components\Widget as WidgetComponent;
+use EEV\Frontpage\Controllers\WidgetController;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
@@ -16,7 +16,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            Hero::class => 'hero',
+//            WidgetComponent::class => 'widget',
+            FrontSections::class => 'frontSections',
         ];
     }
 
@@ -28,13 +29,14 @@ class Plugin extends PluginBase
             if (!empty($model->type)) {
                 $form->removeField('type');
             } else {
+                $form->removeField('template');
                 return;
             }
 
             $widget = new Widget($model->type, $model->data);
 
             if (!empty($widget->getType()->getDataFields())) {
-                $form->addFields($widget->getType()->getDataFields());
+                $form->addTabFields($widget->getType()->getDataFields());
             }
         });
     }

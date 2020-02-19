@@ -1,8 +1,8 @@
 <?php
 
-namespace EEV\Widgets\Classes;
+namespace EEV\Frontpage\Classes;
 
-use EEV\Widgets\Classes\Types\WidgetType;
+use EEV\Frontpage\Classes\Types\WidgetType;
 
 class Widget
 {
@@ -29,5 +29,9 @@ class Widget
 
     public function getType() {
         return $this->type;
+    }
+
+    public function getStyles() {
+        return $this->type->getStyles();
     }
 }

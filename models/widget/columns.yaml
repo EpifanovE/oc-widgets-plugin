@@ -4,15 +4,23 @@ columns:
         type: number
         sortable: true
     name:
-        label: 'eev.widgets::lang.name'
+        label: 'eev.frontpage::lang.name'
         type: text
         searchable: true
         sortable: true
+    type_label:
+        label: 'eev.frontpage::lang.type'
+        type: text
+        searchable: false
+        sortable: false
+    is_active:
+        label: 'eev.frontpage::lang.is_active'
+        type: switch
     created_at:
-        label: 'eev.widgets::lang.created_at'
+        label: 'eev.frontpage::lang.created_at'
         type: datetime
         sortable: true
     updated_at:
-        label: 'eev.widgets::lang.updated_at'
+        label: 'eev.frontpage::lang.updated_at'
         type: datetime
         sortable: true

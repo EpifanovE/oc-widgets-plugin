@@ -1,7 +1,7 @@
-title: 'eev.widgets::lang.widgets'
-modelClass: EEV\Widgets\Models\Widget
-list: $/eev/widgets/models/widget/columns.yaml
-recordUrl: 'eev/widgets/widgetcontroller/update/:id'
+title: 'eev.frontpage::lang.widgets'
+modelClass: EEV\Frontpage\Models\Widget
+list: $/eev/frontpage/models/widget/columns.yaml
+recordUrl: 'eev/frontpage/widgetcontroller/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
 recordsPerPage: 20
 showSetup: true

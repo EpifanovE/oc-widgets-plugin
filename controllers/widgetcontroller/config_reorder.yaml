@@ -1,0 +1,5 @@
+title: 'eev.frontpage::lang.sorting'
+modelClass: EEV\Frontpage\Models\Widget
+nameFrom: name
+toolbar:
+    buttons: reorder_toolbar

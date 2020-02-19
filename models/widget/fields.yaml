@@ -1,13 +1,21 @@
-fields:
-  name:
-    label: 'eev.widgets::lang.name'
-    span: full
-    type: text
-  type:
-    label: 'eev.widgets::lang.type'
-    type: dropdown
-  is_active:
-    label: 'eev.widgets::lang.is_active'
-    span: full
-    type: switch
-    default: true
+tabs:
+  fields:
+    name:
+      label: 'eev.frontpage::lang.name'
+      span: full
+      type: text
+      tab: 'eev.frontpage::lang.settings'
+    type:
+      label: 'eev.frontpage::lang.type'
+      type: dropdown
+      tab: 'eev.frontpage::lang.settings'
+    is_active:
+      label: 'eev.frontpage::lang.is_active'
+      span: full
+      type: switch
+      default: true
+      tab: 'eev.frontpage::lang.settings'
+    template:
+      label: 'eev.frontpage::lang.template'
+      type: dropdown
+      tab: 'eev.frontpage::lang.settings'
