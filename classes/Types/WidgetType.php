@@ -3,6 +3,7 @@
 namespace EEV\Frontpage\Classes\Types;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
 use October\Rain\Support\Facades\Twig;
@@ -26,7 +27,7 @@ abstract class WidgetType
 
     public static function getTypes()
     {
-        return [
+        $types = [
             self::HERO  => [
                 'name'  => Lang::get('eev.frontpage::lang.types.hero.name'),
                 'class' => Hero::class,
@@ -36,6 +37,12 @@ abstract class WidgetType
                 'class' => About::class,
             ],
         ];
+
+        $newTypes = [];
+
+        $newTypes = Event::fire('eev.frontpage.widgets', [$newTypes]);
+
+        return array_merge($types, self::getTypesArray($newTypes));
     }
 
     public static function getOptions()
@@ -69,6 +76,18 @@ abstract class WidgetType
     {
         $templateName = ! empty($this->template) ? $this->template : 'default';
 
+        if ($themeTpl = $this->getThemeHtml($templateName)) {
+            return $themeTpl;
+        }
+
+        if ($pluginTpl = $this->getPluginHtml($templateName)) {
+            return $pluginTpl;
+        }
+
+        return $themeTpl;
+    }
+
+    protected function getThemeHtml($templateName) {
         $themeName = Config::get('cms.activeTheme');
 
         $themeViewFile = themes_path() . '/' . $themeName . '/partials/frontpage/types/' . $this->name . '/' . $templateName . '.htm';
@@ -77,13 +96,21 @@ abstract class WidgetType
             return Twig::parse(file_get_contents($themeViewFile), ['data' => $this->data]);
         }
 
-        $template = 'eev.frontpage::types.' . $this->name . '.' . $templateName;
+        return '';
+    }
+
+    protected function getPluginHtml($templateName) {
+        $template = $this->getPluginViewsNamespace() . '::types.' . $this->name . '.' . $templateName;
 
         if (View::exists($template)) {
             return View::make($template, ['data' => $this->data]);
         }
 
         return '';
+    }
+
+    protected function getPluginViewsNamespace() {
+        return 'eev.frontpage';
     }
 
     public function getTemplatesOptions()
@@ -123,6 +150,26 @@ abstract class WidgetType
         if (method_exists($this, 'doStyles')) {
             return $this->doStyles();
         }
+    }
+
+    protected static function getTypesArray($array)
+    {
+        if (empty($array)) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($array as $item) {
+
+            if ( ! is_array($item)) {
+                continue;
+            }
+
+            $result = array_merge($result, $item);
+        }
+
+        return $result;
     }
 
 }
