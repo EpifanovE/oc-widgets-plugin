@@ -11,29 +11,27 @@ use Illuminate\Support\Facades\Event;
 class Widget extends ComponentBase
 {
     /**
-     * @var WidgetType $widget
+     * @var \EEV\Frontpage\Models\Widget $widget
      */
     protected $widget;
-
-    protected $widgetModel = null;
 
     public function __construct(CodeBase $cmsObject = null, $properties = [])
     {
         parent::__construct($cmsObject, $properties);
 
-        $this->widgetModel = WidgetModel::where('id', $this->property('widget'))->active()->first();
+        $this->widget = WidgetModel::where('id', $this->property('widget'))->active()->first();
 
-        if (empty($this->widgetModel)) {
+        if (empty($this->widget)) {
             return;
         }
 
-        $this->widget = new \EEV\Frontpage\Classes\Widget(WidgetType::HERO, $this->widgetModel->data, $this->widgetModel->template);
-
         $styles = $this->widget->getStyles();
 
-        Event::listen('eev.core.inlineStyles', function ($inlineStyles) use ($styles) {
-            return array_merge($inlineStyles, $styles);
-        });
+        if ( ! empty($styles)) {
+            Event::listen('eev.core.inlineStyles', function ($inlineStyles) use ($styles) {
+                return array_merge($inlineStyles, $styles);
+            });
+        }
     }
 
     public function componentDetails()
@@ -75,7 +73,7 @@ class Widget extends ComponentBase
 
     public function getHtml()
     {
-        if (empty($this->widgetModel)) {
+        if (empty($this->widget)) {
             return '';
         }
 

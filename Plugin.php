@@ -3,9 +3,8 @@
 namespace EEV\Frontpage;
 
 use Backend\Widgets\Form;
-use EEV\Frontpage\Classes\Widget;
 use EEV\Frontpage\Components\FrontSections;
-use EEV\Frontpage\Components\Widget as WidgetComponent;
+use EEV\Frontpage\Components\Widget;
 use EEV\Frontpage\Controllers\WidgetController;
 use System\Classes\PluginBase;
 
@@ -16,7 +15,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-//            WidgetComponent::class => 'widget',
+            Widget::class => 'widget',
             FrontSections::class => 'frontSections',
         ];
     }
@@ -26,6 +25,10 @@ class Plugin extends PluginBase
         parent::__construct($app);
 
         WidgetController::extendFormFields(function (Form $form, $model, $context) {
+            /**
+             * @var \EEV\Frontpage\Models\Widget $model
+             */
+
             if (!empty($model->type)) {
                 $form->removeField('type');
             } else {
@@ -33,11 +36,12 @@ class Plugin extends PluginBase
                 return;
             }
 
-            $widget = new Widget($model->type, $model->data);
-
-            if (!empty($widget->getType()->getDataFields())) {
-                $form->addTabFields($widget->getType()->getDataFields());
+            if (!empty($fields = $model->getTypeObject()->getDataFields())) {
+                $form->addTabFields($fields);
             }
+
+//            dd($form);
+
         });
     }
 

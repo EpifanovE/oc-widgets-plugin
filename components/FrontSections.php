@@ -23,10 +23,10 @@ class FrontSections extends ComponentBase
                                                        ->get();
         $html = '';
 
-        foreach ($widgetsCollection as $widgetEntity) {
-            $html   .= $widgetEntity->getWidget()->getHtml();
+        foreach ($widgetsCollection as $widget) {
+            $html   .= $widget->getHtml();
 
-            $styles = $widgetEntity->getWidget()->getStyles();
+            $styles = $widget->getStyles();
 
             if ( ! empty($styles)) {
                 Event::listen('eev.core.inlineStyles', function ($inlineStyles) use ($styles) {

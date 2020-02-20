@@ -2,7 +2,7 @@ plugin:
     name: 'eev.frontpage::lang.plugin.name'
     description: 'eev.frontpage::lang.plugin.description'
     author: 'Evgeny Epifanov'
-    icon: icon-bread-slice
+    icon: icon-bars
     homepage: 'https://eecode.ru'
 permissions:
     eev.widgets.manage-widgets:
@@ -12,6 +12,6 @@ navigation:
     frontpage:
         label: 'eev.frontpage::lang.plugin.name'
         url: eev/frontpage/widgetcontroller
-        icon: icon-bell
+        icon: icon-bars
         permissions:
             - eev.widgets.manage-widgets

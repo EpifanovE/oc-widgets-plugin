@@ -2,9 +2,10 @@
 
 namespace EEV\Frontpage\Classes\Types;
 
-use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\View;
+use October\Rain\Support\Facades\Twig;
 
 abstract class WidgetType
 {
@@ -57,8 +58,9 @@ abstract class WidgetType
         }
     }
 
-    public static function getTypeLabel($type) {
-        if (!empty(self::getTypes()[$type])) {
+    public static function getTypeLabel($type)
+    {
+        if ( ! empty(self::getTypes()[$type])) {
             return self::getTypes()[$type]['name'];
         }
     }
@@ -66,9 +68,22 @@ abstract class WidgetType
     public function getHtml()
     {
         $templateName = ! empty($this->template) ? $this->template : 'default';
-        $template     = 'eev.frontpage::types.' . $this->name . '.' . $templateName;
 
-        return View::make($template, ['data' => $this->data]);
+        $themeName = Config::get('cms.activeTheme');
+
+        $themeViewFile = themes_path() . '/' . $themeName . '/partials/frontpage/types/' . $this->name . '/' . $templateName . '.htm';
+
+        if (file_exists($themeViewFile)) {
+            return Twig::parse(file_get_contents($themeViewFile), ['data' => $this->data]);
+        }
+
+        $template = 'eev.frontpage::types.' . $this->name . '.' . $templateName;
+
+        if (View::exists($template)) {
+            return View::make($template, ['data' => $this->data]);
+        }
+
+        return '';
     }
 
     public function getTemplatesOptions()
@@ -103,7 +118,8 @@ abstract class WidgetType
         return $fields;
     }
 
-    public function getStyles() {
+    public function getStyles()
+    {
         if (method_exists($this, 'doStyles')) {
             return $this->doStyles();
         }

@@ -5,10 +5,11 @@ namespace EEV\Frontpage\Models;
 use EEV\Frontpage\Classes\Types\WidgetType;
 use Model;
 use October\Rain\Database\Traits\Sortable;
+use October\Rain\Database\Traits\Validation;
 
 class Widget extends Model
 {
-    use \October\Rain\Database\Traits\Validation, Sortable;
+    use Validation, Sortable;
 
     public $table = 'eev_frontpage_widgets';
 
@@ -26,6 +27,11 @@ class Widget extends Model
 
     protected $widget;
 
+    /**
+     * @var WidgetType
+     */
+    protected $typeObject;
+
     public function getTypeOptions()
     {
         return WidgetType::getOptions();
@@ -33,8 +39,8 @@ class Widget extends Model
 
     public function getTemplateOptions()
     {
-        if ( ! empty($this->widget)) {
-            return $this->widget->getType()->getTemplatesOptions();
+        if ( ! empty($this->type)) {
+            return $this->typeObject->getTemplatesOptions();
         }
     }
 
@@ -50,11 +56,20 @@ class Widget extends Model
     public function afterFetch()
     {
         if ( ! empty($this->type)) {
-            $this->widget = new \EEV\Frontpage\Classes\Widget($this->type, $this->data, $this->template);
+            $this->typeObject = WidgetType::getTypeObject($this->type, $this->data, $this->template);
         }
     }
 
-    public function getWidget() {
-        return $this->widget;
+    public function getTypeObject() {
+        return $this->typeObject;
+    }
+
+    public function getHtml()
+    {
+        return $this->typeObject->getHtml();
+    }
+
+    public function getStyles() {
+        return $this->typeObject->getStyles();
     }
 }
