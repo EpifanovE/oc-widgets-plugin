@@ -37,4 +37,10 @@ class FrontSections extends ComponentBase
 
         return $html;
     }
+
+    public function onRun()
+    {
+        $this->addCss('/plugins/eev/frontpage/assets/css/styles.min.css');
+        $this->addJs('/plugins/eev/frontpage/assets/js/scripts.min.js');
+    }
 }
